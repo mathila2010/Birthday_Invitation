@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Grandma's 80th Birthday</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;1,400&family=Karla:wght@400;500;700&family=Pinyon+Script&family=Noto+Sans+Sinhala:wght@400;500;700&family=Noto+Serif+Sinhala:wght@400;500&display=swap">
+<style>
+/* Layout: an open bifold card on a hydrangea ground. Indigo cover leaf with a foil 80 on the left,
+   the paper invitation on the right; countdown, eight decade candles and the practical details sit quietly below.
+   Every text style falls back to a Noto Sinhala face, so the Sinhala version keeps the same serif / sans roles. */
+:root {
+  --ground: #E6E8F4;
+  --paper: #FCFBF8;
+  --ink: #22244F;
+  --muted: #5E6189;
+  --rose: #B92F66;
+  --foil: #B58324;
+  --line: #D3D6EA;
+  --cover: #262A63;
+  --cover-ink: #F3E9D2;
+  --cover-foil: #E3BC6A;
+  --petal-a: #E58BA9;
+  --petal-b: #E3BC6A;
+  --petal-c: #8FA0E0;
+  --flame: #F2A93B;
+  --flame-core: #FFE9B0;
+  --shadow: rgba(34, 36, 79, .2);
+
+  --display: "Bodoni Moda", "Noto Serif Sinhala", Didot, "Bodoni MT", Georgia, serif;
+  --script: "Pinyon Script", "Snell Roundhand", "Apple Chancery", cursive;
+  --si-serif: "Noto Serif Sinhala", "Iskoola Pota", "Sinhala MN", serif;
+  --body: Karla, "Noto Sans Sinhala", "Gill Sans", "Trebuchet MS", "Iskoola Pota", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #111226; --paper: #1D1F3D; --ink: #EFEBF7; --muted: #A9ABCF;
+    --rose: #F48BB0; --foil: #E3BC6A; --line: #33365F;
+    --cover: #2B2E6B; --cover-ink: #F3E9D2; --cover-foil: #E9C678;
+    --petal-a: #E58BA9; --petal-b: #E3BC6A; --petal-c: #8FA0E0;
+    --flame: #F2A93B; --flame-core: #FFE9B0;
+    --shadow: rgba(0, 0, 0, .55);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #111226; --paper: #1D1F3D; --ink: #EFEBF7; --muted: #A9ABCF;
+  --rose: #F48BB0; --foil: #E3BC6A; --line: #33365F;
+  --cover: #2B2E6B; --cover-ink: #F3E9D2; --cover-foil: #E9C678;
+  --petal-a: #E58BA9; --petal-b: #E3BC6A; --petal-c: #8FA0E0;
+  --flame: #F2A93B; --flame-core: #FFE9B0;
+  --shadow: rgba(0, 0, 0, .55);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.55;
+}
+p, h1, h2, dl, dd, ul { margin: 0; }
+ul { padding: 0; list-style: none; }
+
+.wrap {
+  max-width: 960px;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 32px);
+  padding-block: 24px 72px;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(36px, 6vw, 60px);
+}
+
+/* ---------- Language switch ---------- */
+.controls {
+  align-self: flex-end;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: -16px;
+}
+.lang {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+}
+.lang button {
+  font: inherit;
+  font-size: .92rem;
+  font-weight: 500;
+  line-height: 1.4;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  padding: 6px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.lang button[aria-pressed="true"] { background: var(--cover); color: var(--cover-ink); }
+.lang button:focus-visible { outline: 2px solid var(--rose); outline-offset: 2px; }
+
+.label {
+  font-size: .76rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+/* ---------- The card ---------- */
+.card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 24px 50px -22px var(--shadow), 0 2px 6px var(--shadow);
+  animation: rise .9s cubic-bezier(.2, .7, .2, 1) both;
+}
+@keyframes rise { from { transform: translateY(16px); } to { transform: none; } }
+
+.cover {
+  background: var(--cover);
+  color: var(--cover-ink);
+  padding: clamp(28px, 6vw, 52px) clamp(20px, 5vw, 44px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 3vw, 26px);
+  text-align: center;
+}
+.cover .label { color: var(--cover-foil); }
+
+.wreath {
+  position: relative;
+  width: min(100%, 340px);
+  aspect-ratio: 1;
+  max-width: 100%;
+  container-type: inline-size;
+  display: grid;
+  place-items: center;
+}
+.wreath svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: turn 180s linear infinite;
+}
+@keyframes turn { to { transform: rotate(360deg); } }
+.pa { fill: var(--petal-a); }
+.pb { fill: var(--petal-b); }
+.pc { fill: var(--petal-c); }
+.eighty {
+  position: relative;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 7rem;
+  font-size: 38cqw;
+  line-height: 1;
+  color: var(--cover-foil);
+  font-variant-numeric: lining-nums;
+}
+.years {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--display);
+  font-size: 1.15rem;
+  letter-spacing: .08em;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.years i {
+  display: block;
+  width: clamp(36px, 10vw, 72px);
+  height: 1px;
+  background: var(--cover-foil);
+}
+
+.inside {
+  background: var(--paper);
+  padding: clamp(12px, 2.5vw, 18px);
+}
+.frame {
+  height: 100%;
+  border: 1px solid var(--foil);
+  padding: clamp(30px, 6vw, 52px) clamp(18px, 4vw, 34px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+}
+.frame .label { color: var(--rose); }
+.lead {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.2rem;
+}
+.name {
+  font-family: var(--script);
+  font-weight: 400;
+  font-size: clamp(3rem, 9vw, 4.2rem);
+  line-height: 1.1;
+  color: var(--rose);
+  text-wrap: balance;
+}
+.rule {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--foil);
+  margin-block: 6px;
+}
+.rule::before, .rule::after {
+  content: "";
+  width: 56px;
+  height: 1px;
+  background: currentColor;
+}
+.rule span {
+  width: 7px;
+  height: 7px;
+  background: currentColor;
+  transform: rotate(45deg);
+}
+.when {
+  font-family: var(--display);
+  font-size: clamp(1.3rem, 3.4vw, 1.6rem);
+  line-height: 1.25;
+  text-wrap: balance;
+  font-variant-numeric: lining-nums;
+}
+.where { color: var(--muted); }
+.where strong { color: var(--ink); font-weight: 500; }
+.promise {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.08rem;
+  max-width: 24ch;
+  text-wrap: balance;
+  margin-top: 6px;
+}
+
+@media (min-width: 780px) {
+  .card { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .inside { box-shadow: inset 22px 0 26px -24px var(--shadow); }
+}
+
+/* ---------- Countdown and candles ---------- */
+.band {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 28px;
+  align-items: end;
+}
+.count { display: flex; flex-direction: column; gap: 2px; }
+.count .num {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(3.4rem, 11vw, 5rem);
+  line-height: 1;
+  color: var(--rose);
+  font-variant-numeric: lining-nums;
+}
+.count .unit {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.25rem;
+}
+.candle-block { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.candles {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 4px;
+  border-bottom: 1px solid var(--line);
+}
+.candles li {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.flame {
+  width: 13px;
+  height: 21px;
+  border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+  background: radial-gradient(circle at 50% 72%, var(--flame-core) 0 28%, var(--flame) 62%);
+  transform-origin: 50% 100%;
+  animation: flicker 1.9s ease-in-out infinite;
+  margin-bottom: 3px;
+}
+@keyframes flicker {
+  0%, 100% { transform: rotate(-4deg) scaleY(1); }
+  50% { transform: rotate(4deg) scaleY(1.1); }
+}
+.candles li:nth-child(2n) .flame { animation-delay: -.6s; }
+.candles li:nth-child(3n) .flame { animation-delay: -1.1s; }
+.stick {
+  width: 12px;
+  height: 64px;
+  border-radius: 3px 3px 0 0;
+  background: repeating-linear-gradient(135deg, var(--c) 0 6px, var(--paper) 6px 10px);
+  --c: var(--rose);
+}
+.candles li:nth-child(3n+2) .stick { --c: var(--petal-c); }
+.candles li:nth-child(3n) .stick { --c: var(--foil); }
+.candles li:nth-child(1) .stick { height: 58px; }
+.candles li:nth-child(2) .stick { height: 74px; }
+.candles li:nth-child(3) .stick { height: 66px; }
+.candles li:nth-child(4) .stick { height: 84px; }
+.candles li:nth-child(5) .stick { height: 70px; }
+.candles li:nth-child(6) .stick { height: 80px; }
+.candles li:nth-child(7) .stick { height: 62px; }
+.candles li:nth-child(8) .stick { height: 76px; }
+.yrs {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+  font-size: .76rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.yrs span { flex: 1 1 0; min-width: 0; text-align: center; }
+.caption { color: var(--muted); font-size: .95rem; }
+
+@media (min-width: 780px) {
+  .band { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 48px; }
+}
+
+/* ---------- Details ---------- */
+.details {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 28px;
+  border-top: 1px solid var(--line);
+  padding-top: clamp(28px, 5vw, 40px);
+}
+@media (min-width: 560px) { .details { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.details div { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.details dt { color: var(--rose); }
+.details dd { max-width: 34ch; }
+.details dd strong {
+  display: block;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.2rem;
+  line-height: 1.3;
+  font-variant-numeric: lining-nums;
+}
+
+/* ---------- Closing panel ---------- */
+.rsvp {
+  background: var(--cover);
+  color: var(--cover-ink);
+  border-radius: 6px;
+  padding: clamp(26px, 5vw, 44px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px 40px;
+}
+.rsvp > div { display: flex; flex-direction: column; gap: 8px; min-width: 0; flex: 1 1 280px; }
+.rsvp .label { color: var(--cover-foil); }
+.rsvp h2 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(1.7rem, 5vw, 2.3rem);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+.rsvp p { max-width: 42ch; }
+
+.sign {
+  text-align: center;
+  font-family: var(--script);
+  font-size: 2.1rem;
+  line-height: 1.2;
+  color: var(--rose);
+}
+
+/* ---------- Sinhala adjustments: taller lines, no letter-spacing or italics ---------- */
+html[lang="si"] body { line-height: 1.75; }
+html[lang="si"] .label { letter-spacing: .02em; font-size: .9rem; }
+html[lang="si"] .lead,
+html[lang="si"] .promise,
+html[lang="si"] .count .unit { font-style: normal; line-height: 1.6; }
+html[lang="si"] .lead { font-size: 1.12rem; }
+html[lang="si"] .name {
+  font-family: var(--si-serif);
+  font-weight: 500;
+  font-size: clamp(2.1rem, 7vw, 2.9rem);
+  line-height: 1.4;
+}
+html[lang="si"] .when { font-size: clamp(1.1rem, 3vw, 1.3rem); line-height: 1.6; }
+html[lang="si"] .details dd strong { font-size: 1.1rem; line-height: 1.6; }
+html[lang="si"] .rsvp h2 { font-size: clamp(1.35rem, 4.2vw, 1.8rem); line-height: 1.5; }
+html[lang="si"] .sign { font-family: var(--si-serif); font-size: 1.5rem; line-height: 1.6; }
+
+@media (prefers-reduced-motion: reduce) {
+  .card, .wreath svg, .flame { animation: none; }
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="controls">
+    <div class="lang" role="group" aria-label="Theme">
+      <button type="button" id="theme-light" aria-pressed="true" data-i18n="tLight">Light</button>
+      <button type="button" id="theme-dark" aria-pressed="false" data-i18n="tDark">Dark</button>
+    </div>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" id="lang-en" aria-pressed="true">English</button>
+      <button type="button" id="lang-si" aria-pressed="false" lang="si">සිංහල</button>
+    </div>
+  </div>
+
+  <article class="card">
+    <div class="cover">
+      <p class="label" data-i18n="cover">A birthday invitation</p>
+      <div class="wreath">
+        <svg id="wreath" viewBox="0 0 400 400" aria-hidden="true"></svg>
+        <span class="eighty">80</span>
+      </div>
+      <p class="years"><span data-born>1946</span><i></i><span data-year>2026</span></p>
+    </div>
+
+    <div class="inside">
+      <div class="frame">
+        <p class="label" data-i18n="invited">You are warmly invited</p>
+        <p class="lead" data-i18n="lead1">to celebrate our dear</p>
+        <h1 class="name" data-i18n="name">D.&nbsp;D. Agnes</h1>
+        <p class="lead" data-i18n="lead2">as she turns eighty</p>
+        <div class="rule" aria-hidden="true"><span></span></div>
+        <p class="when" data-i18n="when">Tuesday, 13 October 2026<br>7:00 pm to 11:00 pm</p>
+        <p class="where" data-i18n="where"><strong>Clements Reception Hall</strong><br>Hunupitiya Road, Wattala</p>
+        <p class="promise" data-i18n="promise">An evening to celebrate eighty wonderful years.</p>
+      </div>
+    </div>
+  </article>
+
+  <section class="band">
+    <div class="count">
+      <span class="num" id="num">80</span>
+      <span class="unit" id="unit">years, and one evening to toast them</span>
+    </div>
+    <div class="candle-block">
+      <ul class="candles" aria-hidden="true">
+        <li><span class="flame"></span><span class="stick"></span></li>
+        <li><span class="flame"></span><span class="stick"></span></li>
+        <li><span class="flame"></span><span class="stick"></span></li>
+        <li><span class="flame"></span><span class="stick"></span></li>
+        <li><span class="flame"></span><span class="stick"></span></li>
+        <li><span class="flame"></span><span class="stick"></span></li>
+        <li><span class="flame"></span><span class="stick"></span></li>
+        <li><span class="flame"></span><span class="stick"></span></li>
+      </ul>
+      <div class="yrs" id="yrs" aria-hidden="true">
+        <span>1946</span><span>1956</span><span>1966</span><span>1976</span><span>1986</span><span>1996</span><span>2006</span><span>2016</span>
+      </div>
+      <p class="caption" data-i18n="caption">Eight candles, one for every decade since <span data-born>1946</span>.</p>
+    </div>
+  </section>
+
+  <dl class="details">
+    <div>
+      <dt class="label" data-i18n="dtWhen">When</dt>
+      <dd data-i18n="ddWhen"><strong>Tuesday, 13 October 2026</strong>From 7:00 pm to 11:00 pm.</dd>
+    </div>
+    <div>
+      <dt class="label" data-i18n="dtWhere">Where</dt>
+      <dd data-i18n="ddWhere"><strong>Clements Reception Hall</strong>Hunupitiya Road, Wattala.</dd>
+    </div>
+  </dl>
+
+  <section class="rsvp">
+    <div>
+      <p class="label" data-i18n="pLabel">Save the evening</p>
+      <h2 data-i18n="pHead">We hope you will join us</h2>
+      <p data-i18n="pText">Clements Reception Hall is on Hunupitiya Road in Wattala. The celebration begins at 7:00 pm.</p>
+    </div>
+  </section>
+
+  <p class="sign" data-i18n="sign">With love, the family</p>
+</main>
+
+<script>
+// Party details. Change these three numbers and the countdown and decade years follow.
+var PARTY = { year: 2026, month: 10, day: 13 };
+
+// Sinhala text for every element marked data-i18n. English is read from the page itself.
+var SI = {
+  tLight: 'ආලෝක',
+  tDark: 'අඳුරු',
+  cover: 'උපන්දින ආරාධනා පත්‍රය',
+  invited: 'සාදර ආරාධනයයි',
+  lead1: 'අපගේ ආදරණීය',
+  name: 'ඩී.&nbsp;ඩී. ඇග්නස්',
+  lead2: 'මෑණියන්ගේ අසූවැනි උපන්දින සැමරුමට',
+  when: '2026 ඔක්තෝබර් 13 වැනි අඟහරුවාදා<br>ප.ව. 7:00 සිට 11:00 දක්වා',
+  where: '<strong>ක්ලෙමන්ට්ස් රිසෙප්ෂන් හෝල්</strong><br>හුණුපිටිය පාර, වත්තල',
+  promise: 'සොඳුරු වසර අසූවක් සමරන සැන්දෑවක්.',
+  caption: '<span data-born></span> සිට සෑම දශකයකටම එක බැගින් ඉටිපන්දම් අටක්.',
+  dtWhen: 'දිනය හා වේලාව',
+  ddWhen: '<strong>2026 ඔක්තෝබර් 13 වැනි අඟහරුවාදා</strong>ප.ව. 7:00 සිට 11:00 දක්වා.',
+  dtWhere: 'ස්ථානය',
+  ddWhere: '<strong>ක්ලෙමන්ට්ස් රිසෙප්ෂන් හෝල්</strong>හුණුපිටිය පාර, වත්තල.',
+  pLabel: 'මේ සැන්දෑව වෙන් කර තබන්න',
+  pHead: 'ඔබගේ පැමිණීම අපි බලාපොරොත්තු වෙමු',
+  pText: 'ක්ලෙමන්ට්ස් රිසෙප්ෂන් හෝල් පිහිටා ඇත්තේ වත්තල, හුණුපිටිය පාරේය. සැමරුම ප.ව. 7:00 ට ආරම්භ වේ.',
+  sign: 'ආදරයෙන්, පවුලේ සැම'
+};
+var COUNT = {
+  en: {
+    many: 'days until we celebrate',
+    one: 'day to go. See you tomorrow',
+    today: 'today. Happy 80th birthday',
+    past: 'years celebrated. Thank you for coming'
+  },
+  si: {
+    many: 'දිනකින් අපි සමරමු',
+    one: 'දිනයක් පමණයි. හෙට හමුවෙමු',
+    today: 'අදයි. සුබ උපන්දිනයක් වේවා',
+    past: 'වසරක් සැමරුවා. පැමිණි ඔබට ස්තුතියි'
+  }
+};
+
+(function () {
+  var born = PARTY.year - 80;
+  var nodes = document.querySelectorAll('[data-i18n]');
+  var EN = {};
+  nodes.forEach(function (el) { EN[el.getAttribute('data-i18n')] = el.innerHTML; });
+
+  function fillYears() {
+    document.querySelectorAll('[data-born]').forEach(function (el) { el.textContent = born; });
+    document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = PARTY.year; });
+    var yrs = document.getElementById('yrs');
+    if (yrs) Array.prototype.forEach.call(yrs.children, function (el, i) { el.textContent = born + i * 10; });
+  }
+
+  // Countdown in whole calendar days, in the viewer's own time zone.
+  function countdown(lang) {
+    var now = new Date();
+    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var party = new Date(PARTY.year, PARTY.month - 1, PARTY.day);
+    var days = Math.round((party - today) / 86400000);
+    var t = COUNT[lang];
+    var num = document.getElementById('num');
+    var unit = document.getElementById('unit');
+    if (days > 1) { num.textContent = days; unit.textContent = t.many; }
+    else if (days === 1) { num.textContent = '1'; unit.textContent = t.one; }
+    else if (days === 0) { num.textContent = '80'; unit.textContent = t.today; }
+    else { num.textContent = '80'; unit.textContent = t.past; }
+  }
+
+  var btnEn = document.getElementById('lang-en');
+  var btnSi = document.getElementById('lang-si');
+  function setLang(lang, remember) {
+    var dict = lang === 'si' ? SI : EN;
+    nodes.forEach(function (el) {
+      var k = el.getAttribute('data-i18n');
+      if (dict[k] != null) el.innerHTML = dict[k];
+    });
+    document.documentElement.lang = lang;
+    btnEn.setAttribute('aria-pressed', String(lang === 'en'));
+    btnSi.setAttribute('aria-pressed', String(lang === 'si'));
+    fillYears();
+    countdown(lang);
+    if (remember) { try { localStorage.setItem('invite-lang', lang); } catch (e) {} }
+  }
+  btnEn.addEventListener('click', function () { setLang('en', true); });
+  btnSi.addEventListener('click', function () { setLang('si', true); });
+
+  // A link ending in #si opens in Sinhala; otherwise use the viewer's last choice, or English.
+  var start = 'en';
+  try { if (localStorage.getItem('invite-lang') === 'si') start = 'si'; } catch (e) {}
+  if (location.hash === '#si') start = 'si';
+  if (location.hash === '#en') start = 'en';
+  setLang(start, false);
+
+  // Light / dark selector. Until someone chooses, the page follows the device or app setting.
+  var root = document.documentElement;
+  var btnLight = document.getElementById('theme-light');
+  var btnDark = document.getElementById('theme-dark');
+  var mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  function currentTheme() {
+    var a = root.getAttribute('data-theme');
+    if (a === 'dark' || a === 'light') return a;
+    return mq && mq.matches ? 'dark' : 'light';
+  }
+  function syncTheme() {
+    var t = currentTheme();
+    btnLight.setAttribute('aria-pressed', String(t === 'light'));
+    btnDark.setAttribute('aria-pressed', String(t === 'dark'));
+  }
+  function setTheme(t) {
+    root.setAttribute('data-theme', t);
+    try { localStorage.setItem('invite-theme', t); } catch (e) {}
+    syncTheme();
+  }
+  btnLight.addEventListener('click', function () { setTheme('light'); });
+  btnDark.addEventListener('click', function () { setTheme('dark'); });
+  try {
+    var savedTheme = localStorage.getItem('invite-theme');
+    if (savedTheme === 'dark' || savedTheme === 'light') root.setAttribute('data-theme', savedTheme);
+  } catch (e) {}
+  syncTheme();
+  if (mq && mq.addEventListener) mq.addEventListener('change', syncTheme);
+  if (window.MutationObserver) new MutationObserver(syncTheme).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+
+  // Wreath: a ring of petals around the 80.
+  var svg = document.getElementById('wreath');
+  var NS = 'http://www.w3.org/2000/svg';
+  var cls = ['pa', 'pb', 'pc'];
+  function add(tag, attrs) {
+    var el = document.createElementNS(NS, tag);
+    for (var k in attrs) el.setAttribute(k, attrs[k]);
+    svg.appendChild(el);
+  }
+  for (var i = 0; i < 28; i++) {
+    var a = i * (360 / 28);
+    add('ellipse', {
+      cx: 200, cy: 46, rx: 10, ry: 24, 'class': cls[i % 3],
+      transform: 'rotate(' + a + ' 200 200) rotate(' + (i % 2 ? 28 : -28) + ' 200 46)'
+    });
+    add('ellipse', {
+      cx: 200, cy: 76, rx: 4.5, ry: 11, 'class': cls[(i + 2) % 3], opacity: .75,
+      transform: 'rotate(' + (a + 6.4) + ' 200 200) rotate(' + (i % 2 ? -34 : 34) + ' 200 76)'
+    });
+    if (i % 2 === 0) add('circle', { cx: 200, cy: 14, r: 3.6, 'class': 'pb', transform: 'rotate(' + (a + 6.4) + ' 200 200)' });
+  }
+})();
+</script>
+</body>
+</html>
