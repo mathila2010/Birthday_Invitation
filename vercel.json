@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/agnes-80th-invitation.html",
+      "permanent": true
+    }
+  ]
+}
