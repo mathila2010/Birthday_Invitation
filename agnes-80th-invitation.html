@@ -467,7 +467,7 @@ html[lang="si"] .sign { font-family: var(--si-serif); font-size: 1.5rem; line-he
         <li><span class="flame"></span><span class="stick"></span></li>
       </ul>
       <div class="yrs" id="yrs" aria-hidden="true">
-        <span>1946</span><span>1956</span><span>1966</span><span>1976</span><span>1986</span><span>1996</span><span>2006</span><span>2016</span>
+        <span>1956</span><span>1966</span><span>1976</span><span>1986</span><span>1996</span><span>2006</span><span>2016</span><span>2026</span>
       </div>
       <p class="caption" data-i18n="caption">Eight candles, one for every decade since <span data-born>1946</span>.</p>
     </div>
@@ -546,7 +546,7 @@ var COUNT = {
     document.querySelectorAll('[data-born]').forEach(function (el) { el.textContent = born; });
     document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = PARTY.year; });
     var yrs = document.getElementById('yrs');
-    if (yrs) Array.prototype.forEach.call(yrs.children, function (el, i) { el.textContent = born + i * 10; });
+    if (yrs) Array.prototype.forEach.call(yrs.children, function (el, i) { el.textContent = born + (i + 1) * 10; });
   }
 
   // Countdown in whole calendar days, in the viewer's own time zone.
